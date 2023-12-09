@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display:;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            
+            background-color:#000; /* Fallback color */
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: rgba(28, 27, 27, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        input, select {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        #formula {
+            margin-top: 20px;
+            color: #fff;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Degree to All Temperature Unit Conversion</h1>
+
+    <div class="main-container">
+        <div class="card">
+            <label for="temperature">Enter Temperature in Celsius:</label>
+            <input type="text" id="temperature" placeholder="Enter temperature" />
+
+            <label for="unit">Select Conversion Unit:</label>
+            <select id="unit">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+            </select>
+
+            <button onclick="convertTemperature()">Convert</button>
+
+            <div id="result"></div>
+        </div>
+
+        <div class="card">
+            <div id="formula">
+                Conversion Formula:<br>
+                <br>
+                Fahrenheit = (Celsius × 9/5) + 32<br>
+                Kelvin = Celsius + 273.15
+            </div>
+            <img src="images.jpeg" alt="Formula Image">
+        </div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            var inputTemperature = document.getElementById("temperature").value;
+            var selectedUnit = document.getElementById("unit").value;
+            var resultElement = document.getElementById("result");
+
+            // Validate input as a number
+            if (isNaN(inputTemperature)) {
+                resultElement.innerText = "Please enter a valid number for temperature.";
+                return;
+            }
+
+            // Convert temperature based on selected unit
+            var convertedTemperature;
+            switch (selectedUnit) {
+                case "celsius":
+                    convertedTemperature = parseFloat(inputTemperature);
+                    resultElement.innerText = "Converted Temperature: " + convertedTemperature.toFixed(2) + " °C";
+                    break;
+                case "fahrenheit":
+                    convertedTemperature = (parseFloat(inputTemperature) * (9/5)) + 32;
+                    resultElement.innerText = "Converted Temperature: " + convertedTemperature.toFixed(2) + " °F";
+                    break;
+                case "kelvin":
+                    convertedTemperature = parseFloat(inputTemperature) + 273.15;
+                    resultElement.innerText = "Converted Temperature: " + convertedTemperature.toFixed(2) + " K";
+                    break;
+                default:
+                    resultElement.innerText = "Invalid unit selected.";
+                    break;
+            }
+        }
+        
+    </script>
+    
+
+</body>
+</html>
